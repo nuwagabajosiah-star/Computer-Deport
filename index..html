@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Computer Depot | Uganda</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/jpg" href="image/logo_and_name.jpg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    .card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 15px;
+}
+
+.card img:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{
+    background:#ffffff;
+    color:#111;
+    transition:background 1.5s ease;
+    scroll-behavior:smooth;
+}
+header{
+    position:fixed;
+    top:0;left:0;width:100%;
+    background:#0f172a;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+    z-index:1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    animation: slideDown 0.8s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: bounceIn 1s ease;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.logo img{
+    height: 50px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: rotate(360deg) scale(1.1);
+}
+
+nav a{
+    margin-left:18px;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #38bdf8;
+    transition: width 0.4s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover{
+    color:#38bdf8;
+    transform: translateY(-3px);
+}
+
+.icons i{
+    margin-left:18px;
+    cursor:pointer;
+    color:#38bdf8;
+    font-size:18px;
+    transition: all 0.3s ease;
+}
+
+.icons i:hover {
+    transform: scale(1.3) rotate(15deg);
+    color: #0ea5e9;
+}
+
+.cart-count{
+    background:red;
+    color:white;
+    font-size:12px;
+    padding:2px 6px;
+    border-radius:50%;
+    position:relative;
+    top:-10px;
+    right:8px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+section{
+    min-height:100vh;
+    padding:120px 30px 60px;
+    opacity: 0;
+    transform: translateY(80px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* HOME */
+#home{text-align:center}
+#home h1{
+    font-size:3.2rem;
+    margin-bottom:20px;
+    animation: fadeInUp 1.2s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#home p{
+    max-width:900px;
+    margin:15px auto;
+    font-size:1.2rem;
+    line-height:1.8;
+    animation: fadeInUp 1.4s ease;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-top:50px;
+}
+
+.feature{
+    background:#f1f5f9;
+    padding:25px;
+    border-radius:14px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+}
+
+.feature.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feature:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(2,132,199,0.3);
+    background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 100%);
+}
+
+.feature i{
+    font-size:30px;
+    color:#0284c7;
+    margin-bottom:10px;
+    transition: all 0.4s ease;
+}
+
+.feature:hover i {
+    transform: rotateY(360deg) scale(1.3);
+    color: #0ea5e9;
+}
+
+/* PRODUCTS */
+.grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card:hover{
+    transform:translateY(-20px) scale(1.05);
+    box-shadow:0 20px 50px rgba(56,189,248,0.8);
+}
+
+.card-content{padding:15px}
+.card h3{
+    margin-bottom:6px;
+    transition: all 0.3s ease;
+}
+
+.card:hover h3 {
+    color: #0284c7;
+    transform: scale(1.05);
+}
+
+.specs{font-size:0.9rem;color:#444;line-height:1.6}
+.price{
+    margin:10px 0;
+    font-size:1.2rem;
+    font-weight:bold;
+    color:#0284c7;
+    transition: all 0.3s ease;
+}
+
+.card:hover .price {
+    transform: scale(1.15);
+    color: #0ea5e9;
+}
+
+button{
+    background:#0284c7;
+    color:white;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover{
+    background:#0369a1;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(2,132,199,0.5);
+}
+
+/* SOFTWARE SERVICES SECTION */
+.software-section {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    padding: 80px 30px;
+}
+
+.software-content {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.software-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.software-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.software-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.software-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.software-card i {
+    font-size: 48px;
+    color: #38bdf8;
+    margin-bottom: 20px;
+    transition: all 0.5s ease;
+}
+
+.software-card:hover i {
+    transform: rotateY(360deg) scale(1.2);
+    color: #0ea5e9;
+}
+
+.software-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.software-card ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.software-card ul li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.software-card ul li:hover {
+    transform: translateX(10px);
+    color: #38bdf8;
+}
+
+.software-card ul li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+/* LIGHTBOX STYLES */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    animation: zoomIn 0.5s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+    color: #38bdf8;
+    transform: rotate(90deg) scale(1.3);
+}
+
+/* PANELS */
+.panel{
+    position:fixed;
+    top:80px;
+    right:20px;
+    width:300px;
+    background:white;
+    padding:18px;
+    border-radius:16px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    display:none;
+    z-index:2000;
+    animation: slideInRight 0.4s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.panel input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:10px;
+    border:1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.panel input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56,189,248,0.3);
+    transform: scale(1.02);
+}
+
+#cartItems{
+    list-style:none;
+    margin-top:10px;
+}
+#cartItems li{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+
+/* PROMOTIONAL SECTION */
+.promo-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+    padding: 60px 30px;
+    text-align: center;
+    color: white;
+}
+
+.promo-grid {
+    max-width: 1200px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.promo-item {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.promo-item.animate-in {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.promo-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-15px) scale(1.1);
+    box-shadow: 0 15px 40px rgba(56,189,248,0.4);
+}
+
+.promo-item i {
+    font-size: 36px;
+    color: #38bdf8;
+    margin-bottom: 15px;
+    transition: all 0.4s ease;
+}
+
+.promo-item:hover i {
+    transform: rotateY(360deg) scale(1.3);
+}
+
+.promo-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.newsletter-form {
+    max-width: 500px;
+    margin: 30px auto;
+    display: flex;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+}
+
+.newsletter-form button {
+    padding: 12px 30px;
+    background: #38bdf8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.newsletter-form button:hover {
+    background: #0284c7;
+}
+
+/* CONTACT SECTION */
+.contact-section {
+    background: #f8fafc;
+    padding: 60px 30px;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #0f172a;
+    animation: fadeInUp 1s ease;
+}
+
+.contact-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #475569;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: #0284c7;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: bold;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.contact-btn:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.contact-btn:hover {
+    background: #0369a1;
+    transform: translateY(-8px) scale(1.1);
+    box-shadow: 0 15px 30px rgba(2, 132, 199, 0.5);
+}
+
+.contact-btn.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.contact-btn.instagram:hover {
+    transform: translateY(-8px) scale(1.1);
+    box-shadow: 0 15px 30px rgba(188, 24, 136, 0.6);
+}
+
+.contact-btn i {
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover i {
+    transform: rotate(360deg) scale(1.2);
+}
+
+/* FOOTER */
+footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .logo img {
+        height: 40px;
+    }
+    nav {
+        display: none;
+    }
+    .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-btn {
+        width: 80%;
+        justify-content: center;
+    }
+    .card img {
+        height: 200px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="image/logo and name.jpg" alt="Computer Depot Logo">
+        <span style="font-size:1.6rem;font-weight:bold;color:#1e3a5f;">COMPUTER DEPOT</span>
+    </div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#laptops">Laptops</a>
+        <a href="#desktops">Desktops</a>
+        <a href="#monitors">Monitors</a>
+        <a href="#accessories">Accessories</a>
+        <a href="#software">Software Services</a>
+    </nav>
+    <div class="icons">
+        <i class="fa-solid fa-magnifying-glass" onclick="togglePanel('searchPanel')"></i>
+        <i class="fa-solid fa-user" onclick="togglePanel('userPanel')"></i>
+        <i class="fa-solid fa-heart" onclick="togglePanel('favouritesPanel')"></i>
+        <span class="cart-count" id="favouritesCount">0</span>
+        <i class="fa-solid fa-cart-shopping" onclick="togglePanel('cartPanel')"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+</header>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="Enlarged view">
+    </div>
+</div>
+
+<!-- PANELS -->
+<div id="searchPanel" class="panel">
+    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+    <div id="searchResults" style="margin-top:10px; max-height:300px; overflow-y:auto;"></div>
+</div>
+
+<div id="userPanel" class="panel">
+    <h3>Account</h3>
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+</div>
+
+<div id="cartPanel" class="panel">
+    <h3>Your Cart</h3>
+    <ul id="cartItems"></ul>
+</div>
+
+<div id="favouritesPanel" class="panel">
+    <h3>Your Favourites</h3>
+    <ul id="favouritesItems"></ul>
+</div>
+
+<!-- HOME -->
+<section id="home">
+    <h1>Your Trusted Tech Plug in Uganda</h1>
+    <p>
+        Computer Depot delivers reliable laptops and accessories for work, gaming,
+        school, and business. Every device is tested and priced fairly for the Ugandan market.
+    </p>
+
+    <div class="features">
+        <div class="feature"><i class="fa-solid fa-check"></i><h4>Quality Tested</h4><p>Every laptop is checked.</p></div>
+        <div class="feature"><i class="fa-solid fa-bolt"></i><h4>Fast Performance</h4><p>SSD powered systems.</p></div>
+        <div class="feature"><i class="fa-solid fa-shield"></i><h4>Trusted Seller</h4><p>Local support.</p></div>
+        <div class="feature"><i class="fa-solid fa-phone"></i><h4>Easy Contact</h4><p>0792942764 / 0767637200</p></div>
+    </div>
+</section>
+
+<section id="laptops">
+<h1 style="text-align:center;margin-bottom:40px">Laptops</h1>
+<div class="grid">
+
+<div class="card" data-name="Lenovo ThinkPad X260" data-specs="Intel Core i5 4-8GB RAM 256GB SSD">
+<img src="image/laptop  2.jpeg" onclick="openLightbox(this.src)" alt="Lenovo ThinkPad X260">
+<div class="card-content">
+<h3>Lenovo ThinkPad X260</h3>
+<p class="specs">Intel Core i5 • 4-8GB RAM • 256GB SSD</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('Lenovo ThinkPad X260')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="HP EliteBook 840 G6" data-specs="Core i5 8GB RAM 256GB SSD">
+<img src="image/laptop 1.jpeg" onclick="openLightbox(this.src)" alt="HP EliteBook 840 G6">
+<div class="card-content">
+<h3>HP EliteBook 840 G6</h3>
+<p class="specs">Core i5 • 8GB RAM • 256GB SSD</p>
+<p class="price">UGX 1,050,000</p>
+<button onclick="addToFavourites('HP EliteBook 840 G6')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="Dell G15 5510" data-specs="Intel Core i5 512GB SSD">
+<img src="image/laptop 31.jpeg" onclick="openLightbox(this.src)" alt="Dell G15 5510">
+<div class="card-content">
+<h3>Dell G15 5510</h3>
+<p class="specs">Intel Core i5 • 512GB SSD</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('Dell G15 5510')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="HP Envy x360" data-specs="Intel Core i5 256GB to 512GB SSD">
+<img src="image/laptop 28.jpeg" onclick="openLightbox(this.src)" alt="HP Envy x360">
+<div class="card-content">
+<h3>HP Envy x360</h3>
+<p class="specs">Intel Core i5 • 256GB to 512GB SSD</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('HP Envy x360')">Add to Favourites</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="desktops">
+<h1 style="text-align:center;margin-bottom:40px">System Units</h1>
+<div class="grid">
+
+<div class="card" data-name="Dell OptiPlex 7050" data-specs="Intel Core i5-7500 8-16GB RAM 256-512GB SSD">
+<img src="image/CPU 1.jpeg" onclick="openLightbox(this.src)" alt="Dell Optiplex 7050">
+    <div class="card-content">
+<h3>Dell OptiPlex 7050</h3>
+<p class="specs"><strong>Brand:</strong> Dell<br>
+<strong>Model:</strong> OptiPlex 7050 SFF<br>
+<strong>Processor:</strong> Intel Core i5-7500 (7th Gen, Quad-Core, 3.4-3.5 GHz)<br>
+<strong>RAM:</strong> 8GB or 16GB DDR4<br>
+<strong>Storage:</strong> 256GB or 512GB SSD</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('Dell OptiPlex 7050')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="HP ProDesk 600 G3" data-specs="Intel Core i5-6500 8GB RAM 256GB SSD">
+    <img src="image/CPU 5.jpeg" onclick="openLightbox(this.src)" alt="HP ProDesk 600 G3">
+<div class="card-content">
+<h3>HP ProDesk 600 G3</h3>
+<p class="specs"><strong>Brand:</strong> HP<br>
+<strong>Model:</strong> ProDesk 600 G3/G4 Tower<br>
+<strong>Processor:</strong> Intel Core i5-6500 or i5-7500 (6th/7th Gen)<br>
+<strong>RAM:</strong> 8GB DDR4<br>
+<strong>Storage:</strong> 256GB SSD or 500GB HDD</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('HP ProDesk 600 G3')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="HP Z440 Workstation" data-specs="Intel Xeon E5-1620 16GB RAM 512GB SSD">
+    <img src="image/CPU 6.jpeg" onclick="openLightbox(this.src)" alt="HP Z440 workstation">
+<div class="card-content">
+<h3>HP Z440 Workstation</h3>
+<p class="specs"><strong>Brand:</strong> HP<br>
+<strong>Model:</strong> HP Z440 Workstation<br>
+<strong>Processor:</strong> Intel Xeon E5-1620 v3 (Quad/Hex Core, 3.5 GHz+)<br>
+<strong>RAM:</strong> 16GB DDR4 ECC<br>
+<strong>Storage:</strong> 512GB SSD + optional 1TB HDD</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('HP Z440 Workstation')">Add to Favourites</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="monitors">
+<h1 style="text-align:center;margin-bottom:40px">Monitors</h1>
+<div class="grid">
+
+<div class="card" data-name="HP All-in-One Desktop Black" data-specs="HP 22-df or HP 24-df series">
+    <img src="image/monitor 4.jpeg" onclick="openLightbox(this.src)" alt="HP">
+<div class="card-content">
+<h3>HP Black Bezel</h3>
+<p class="specs"><strong>Brand:</strong> HP<br>
+<strong>Model:</strong> HP 22-df or HP 24-df series</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('HP All-in-One Desktop Black')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="HP All-in-One Desktop White" data-specs="HP 24-cr or HP Pavilion AIO">
+    <img src="image/Monitor 1.jpeg" onclick="openLightbox(this.src)" alt="Hp">
+<div class="card-content">
+<h3>HP Bezel<h3>
+<p class="specs"><strong>Brand:</strong> HP<br>
+<strong>Model:</strong> HP 24-cr or HP Pavilion AIO</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('HP All-in-One Desktop White')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="Lenovo IdeaCentre AIO 3" data-specs="IdeaCentre AIO 3 24 F0G1004DIN">
+    <img src="image/Monitor 2.jpeg" onclick="openLightbox"(this.src)" alt="lenovo">
+<div class="card-content">
+<h3>Lenovo White</h3>
+<p class="specs"><strong>Brand:</strong> Lenovo<br>
+<strong>Model:</strong> IdeaCentre AIO 3 24 (F0G1004DIN)</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('Lenovo IdeaCentre AIO 3')">Add to Favourites</button>
+</div>
+</div>
+
+
+</div>
+</section>
+
+<section id="accessories">
+<h1 style="text-align:center;margin-bottom:40px">Accessories & Adapters</h1>
+<div class="grid">
+
+<div class="card" data-name="HP 230W Adapter" data-specs="230W Blue Tip">
+<div class="card-content">
+<h3>HP 230W Adapter (Blue Tip)</h3>
+<p class="specs"><strong>Brand:</strong> HP<br>
+<strong>Model:</strong> HP 230W Smart AC Adapter (Part No. 745664-001)<br>
+<strong>Power Output:</strong> 230W</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('HP 230W Adapter')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="HP USB-C Adapter" data-specs="65W or 90W USB-C Braided Cable">
+<div class="card-content">
+<h3>HP USB-C Adapter (Braided Cable)</h3>
+<p class="specs"><strong>Brand:</strong> HP<br>
+<strong>Model:</strong> HP 65W or 90W USB-C AC Adapter<br>
+<strong>Power Output:</strong> 65W or 90W</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('HP USB-C Adapter')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="Lenovo 65W USB-C Adapter" data-specs="65W USB-C Slim">
+<div class="card-content">
+<h3>Lenovo 65W USB-C Adapter</h3>
+<p class="specs"><strong>Brand:</strong> Lenovo<br>
+<strong>Model:</strong> Lenovo 65W USB-C Slim Adapter (Part No. ADLX65YDC3D)<br>
+<strong>Power Output:</strong> 65W</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('Lenovo 65W USB-C Adapter')">Add to Favourites</button>
+</div>
+</div>
+
+<div class="card" data-name="Lenovo 170W Yellow Tip Adapter" data-specs="170W Yellow Tip">
+<div class="card-content">
+<h3>Lenovo 170W Yellow Tip Adapter</h3>
+<p class="specs"><strong>Brand:</strong> Lenovo<br>
+<strong>Model:</strong> ADL170NDC3A<br>
+<strong>Power Output:</strong> 170W</p>
+<p class="price">UGX -</p>
+<button onclick="addToFavourites('Lenovo 170W Yellow Tip Adapter')">Add to Favourites</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- SOFTWARE SERVICES SECTION -->
+<section id="software" class="software-section">
+    <div class="software-content">
+        <h1 style="text-align:center;margin-bottom:20px;font-size:3rem">Software & Technical Services</h1>
+        <p style="text-align:center;font-size:1.2rem;margin-bottom:40px">We don't just sell computers—we make sure they work perfectly for you!</p>
+        
+        <div class="software-grid">
+            <div class="software-card">
+                <i class="fa-brands fa-windows"></i>
+                <h3>Windows Installation</h3>
+                <p>Professional operating system installation and setup services</p>
+                <ul>
+                    <li>Windows 10 & Windows 11 Installation</li>
+                    <li>Genuine & Activated Systems</li>
+                    <li>Driver Installation & Updates</li>
+                    <li>System Optimization</li>
+                    <li>Boot Configuration & Repair</li>
+                </ul>
+            </div>
+
+            <div class="software-card">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h3>System Troubleshooting</h3>
+                <p>Expert diagnostics and repair for all software issues</p>
+                <ul>
+                    <li>Blue Screen Error Fixes</li>
+                    <li>Slow PC Performance Solutions</li>
+                    <li>Boot Failure Recovery</li>
+                    <li>System Crash Repair</li>
+                    <li>Startup Problem Resolution</li>
+                </ul>
+            </div>
+
+            <div class="software-card">
+                <i class="fa-solid fa-virus"></i>
+                <h3>Virus & Malware Removal</h3>
+                <p>Complete system cleaning and security protection</p>
+                <ul>
+                    <li>Virus & Malware Scanning</li>
+                    <li>Spyware & Adware Removal</li>
+                    <li>Antivirus Installation</li>
+                    <li>System Security Hardening</li>
+                    <li>Data Recovery from Infected Systems</li>
+                </ul>
+            </div>
+
+            <div class="software-card">
+                <i class="fa-solid fa-download"></i>
+                <h3>Software Installation</h3>
+                <p>Setup and configuration of essential programs</p>
+                <ul>
+                    <li>Microsoft Office Installation</li>
+                    <li>Adobe Creative Suite Setup</li>
+                    <li>Antivirus & Security Software</li>
+                    <li>Business & Productivity Tools</li>
+                    <li>Custom Software Configuration</li>
+                </ul>
+            </div>
+
+            <div class="software-card">
+                <i class="fa-solid fa-database"></i>
+                <h3>Data Backup & Recovery</h3>
+                <p>Protect your important files and recover lost data</p>
+                <ul>
+                    <li>Data Backup Solutions</li>
+                    <li>File Recovery Services</li>
+                    <li>System Image Creation</li>
+                    <li>Cloud Backup Setup</li>
+                    <li>Hard Drive Data Extraction</li>
+                </ul>
+            </div>
+
+            <div class="software-card">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h3>System Upgrades</h3>
+                <p>Hardware and software optimization services</p>
+                <ul>
+                    <li>RAM & SSD Upgrades</li>
+                    <li>Windows Version Upgrades</li>
+                    <li>System Performance Tuning</li>
+                    <li>Driver Updates & Management</li>
+                    <li>BIOS/UEFI Configuration</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:50px;padding:30px;background:rgba(255,255,255,0.1);border-radius:16px">
+            <h3 style="font-size:1.8rem;margin-bottom:15px">Why Choose Our Services?</h3>
+            <p style="font-size:1.1rem;line-height:1.8;max-width:800px;margin:auto">
+                At Computer Depot, we have certified technicians with years of experience handling all types of computer issues. We use genuine software, provide warranty on our services, and ensure your computer runs at peak performance. Whether it's a fresh Windows installation, virus removal, or system troubleshooting, we've got you covered!
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- PROMOTIONAL SECTION -->
+<section class="promo-section">
+    <h1 style="margin-bottom:20px">Exclusive Benefits</h1>
+    <p style="font-size:1.1rem;margin-bottom:30px">Join thousands of satisfied customers across Uganda</p>
+    
+    <div class="promo-grid">
+        <div class="promo-item">
+            <i class="fa-solid fa-envelope"></i>
+            <h3>Sign up & Save</h3>
+            <p>Subscribe to our newsletter and get exclusive deals delivered to your inbox</p>
+        </div>
+        
+        <div class="promo-item">
+            <i class="fa-solid fa-truck"></i>
+            <h3>Free Shipping</h3>
+            <p>Free shipping & extended returns through January 23, 2026</p>
+        </div>
+        
+        <div class="promo-item">
+            <i class="fa-solid fa-tag"></i>
+            <h3>Best Prices Guaranteed</h3>
+            <p>We match or beat any competitor's price in Uganda</p>
+        </div>
+        
+        <div class="promo-item">
+            <i class="fa-solid fa-star"></i>
+            <h3>Exclusive Deals</h3>
+            <p>Members get access to special promotions and early sales</p>
+        </div>
+    </div>
+    
+    <div style="margin-top:40px">
+        <h3 style="margin-bottom:15px">Subscribe to Our Newsletter</h3>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+    <h2>Looking for More?</h2>
+    <p>We have a wide selection of products and services. Get in touch with us today!</p>
+    
+    <div class="contact-buttons">
+        <a href="tel:0792942764" class="contact-btn">
+            <i class="fa-solid fa-phone"></i>
+            Call: 0792942764
+        </a>
+        <a href="tel:0767637200" class="contact-btn">
+            <i class="fa-solid fa-phone"></i>
+            Call: 0767637200
+        </a>
+        <a href="https://www.instagram.com/computerdepott/" target="_blank" class="contact-btn instagram">
+            <i class="fa-brands fa-instagram"></i>
+            Follow Us on Instagram
+        </a>
+    </div>
+</section>
+
+<footer>
+<p>☎ 0792942764 | 0767637200</p>
+<p><a href="https://www.instagram.com/computerdepott/" target="_blank" style="color:#38bdf8;text-decoration:none">
+    <i class="fa-brands fa-instagram"></i> @computerdepott
+</a></p>
+<p>&copy; 2026 Computer Depot | Your Trusted Tech Plug in Uganda</p>
+</footer>
+
+<script>
+let cart=[];
+let favourites=[];
+
+// SCROLL ANIMATION
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+});
+
+// CARD ANIMATIONS
+const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, index * 150);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card').forEach(card => {
+    cardObserver.observe(card);
+});
+
+// FEATURE ANIMATIONS
+const featureObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, index * 100);
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.feature').forEach(feature => {
+    featureObserver.observe(feature);
+});
+
+// SOFTWARE CARD ANIMATIONS
+const softwareObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, index * 120);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.software-card').forEach(card => {
+    softwareObserver.observe(card);
+});
+
+// PROMO ITEM ANIMATIONS
+const promoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, index * 100);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.promo-item').forEach(item => {
+    promoObserver.observe(item);
+});
+
+// Initial visibility for home section
+document.getElementById('home').classList.add('visible');
+
+// LIGHTBOX FUNCTIONS
+function openLightbox(imageSrc) {
+    document.getElementById('lightbox-img').src = imageSrc;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
+
+// CART FUNCTIONS
+function addToCart(item){
+    cart.push(item);
+    document.getElementById("cartCount").innerText=cart.length;
+    renderCart();
+}
+function renderCart(){
+    let list=document.getElementById("cartItems");
+    list.innerHTML="";
+    cart.forEach((item,i)=>{
+        list.innerHTML+=`<li>${item}<span style="color:red;cursor:pointer" onclick="removeItem(${i})">x</span></li>`;
+    });
+}
+function removeItem(i){
+    cart.splice(i,1);
+    document.getElementById("cartCount").innerText=cart.length;
+    renderCart();
+}
+
+// FAVOURITES FUNCTIONS
+function addToFavourites(item){
+    if(!favourites.includes(item)){
+        favourites.push(item);
+        document.getElementById("favouritesCount").innerText=favourites.length;
+        renderFavourites();
+    }
+}
+function renderFavourites(){
+    let list=document.getElementById("favouritesItems");
+    list.innerHTML="";
+    favourites.forEach((item,i)=>{
+        list.innerHTML+=`<li>${item}<span style="color:red;cursor:pointer" onclick="removeFavourite(${i})">x</span></li>`;
+    });
+}
+function removeFavourite(i){
+    favourites.splice(i,1);
+    document.getElementById("favouritesCount").innerText=favourites.length;
+    renderFavourites();
+}
+
+function togglePanel(id){
+    ["searchPanel","userPanel","cartPanel","favouritesPanel"].forEach(p=>{
+        document.getElementById(p).style.display="none";
+    });
+    let el=document.getElementById(id);
+    el.style.display=el.style.display==="block"?"none":"block";
+}
+
+// ENHANCED SEARCH FUNCTION WITH INSTAGRAM REDIRECT
+function searchProducts(){
+    let q=document.getElementById("searchInput").value.toLowerCase();
+    let searchResults = document.getElementById("searchResults");
+    let cards = document.querySelectorAll(".card");
+    let matches = [];
+    
+    cards.forEach(card=>{
+        let name = card.getAttribute('data-name') || '';
+        let specs = card.getAttribute('data-specs') || '';
+        let cardText = (name + ' ' + specs).toLowerCase();
+        
+        if(cardText.includes(q) && q.length > 0){
+            matches.push({
+                name: name,
+                specs: specs,
+                element: card
+            });
+        }
+    });
+    
+    // Display search results
+    if(q.length > 0 && matches.length > 0){
+        searchResults.innerHTML = matches.map(m => 
+            `<div style="padding:10px; border-bottom:1px solid #eee; cursor:pointer;" 
+                  onclick="scrollToProduct('${m.name}')">
+                <strong>${m.name}</strong><br>
+                <small style="color:#666">${m.specs}</small>
+            </div>`
+        ).join('');
+    } else if(q.length > 0){
+        searchResults.innerHTML = `
+            <div style="padding:15px; text-align:center;">
+                <p style="color:#999;margin-bottom:15px;">No products found</p>
+                <p style="font-size:0.9rem;margin-bottom:10px;">Looking for something specific?</p>
+                <a href="https://www.instagram.com/computerdepott/" target="_blank" 
+                   style="display:inline-block;padding:10px 20px;background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+                   color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
+                    <i class="fa-brands fa-instagram"></i> Contact us on Instagram
+                </a>
+            </div>
+        `;
+    } else {
+        searchResults.innerHTML = '';
+    }
+}
+
+function scrollToProduct(productName){
+    let cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+        if(card.getAttribute('data-name') === productName){
+            card.scrollIntoView({behavior: 'smooth', block: 'center'});
+            card.style.boxShadow = '0 0 30px rgba(56,189,248,0.8)';
+            setTimeout(() => {
+                card.style.boxShadow = '0 10px 30px rgba(0,0,0,0.12)';
+            }, 2000);
+            togglePanel('searchPanel');
+        }
+    });
+}
+
+// NEWSLETTER SUBSCRIPTION
+function subscribeNewsletter(e){
+    e.preventDefault();
+    let email = e.target.querySelector('input[type="email"]').value;
+    alert('Thank you for subscribing! We will send exclusive deals to ' + email);
+    e.target.reset();
+}
+
+/* DARKER COLOR FADING */
+const sections=[
+{id:"home",color:"#ffffff"},
+{id:"laptops",color:"#d6e4f0"},
+{id:"desktops",color:"#bfcfe0"},
+{id:"monitors",color:"#a9bcd2"},
+{id:"accessories",color:"#94a9c3"}
+];
+window.addEventListener("scroll",()=>{
+    let pos=window.scrollY+window.innerHeight/2;
+    sections.forEach(s=>{
+        let el=document.getElementById(s.id);
+        if(el && el.offsetTop<=pos && el.offsetTop+el.offsetHeight>pos){
+            document.body.style.background=s.color;
+        }
+    });
+});
+</script>
+
+</body>
+</html>
